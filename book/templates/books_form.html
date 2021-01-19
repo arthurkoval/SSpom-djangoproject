@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+
+{% block title %} Додати книгу {% endblock %}
+
+{% block form_buttons %} 
+<div style="margin: 0;position: absolute;top: 50%;left: 50%;-ms-transform: translate(-50%, -50%);transform: translate(-50%, -50%);">
+    <form class="form-inline mt-2 mt-md-0"action="{% url 'search_books' %}" method="get">
+      <input name="s" type="text" class="form-control mr-sm-2" style="width: 400px">
+      <button class="btn btn-success" style="margin-left: 20px" type="submit">Пошук</button>
+    </form>
+</div>    
+<a href="{% url 'books_insert' %}" style="margin-left: 20px" class="btn btn-success"></i>Додати книгу</a>
+{% endblock %}
+
+{% block content %}
+<div>
+    <form action="" method="POST" autocomplete="off" style="margin: 70px;">
+
+        {% csrf_token %}
+        <div>
+            <p style="color: aliceblue;"><strong>Name</strong></p>
+            {{ form.name }}
+            <p style="color: aliceblue;"><strong>Description</strong></p>
+            {{ form.description }}
+        </div> 
+        <div>
+            <p style="color: aliceblue;"><strong>Count</strong></p>
+            {{ form.count }}
+        </div>
+        <div style="color: white;">
+            <p style="color: aliceblue;"><strong>Authors</strong></p>
+            {{ form.authors }}
+        </div>
+        <button type="submit" class="btn btn-success">Submit</button>
+
+    </form>
+</div>
+{% endblock content %}

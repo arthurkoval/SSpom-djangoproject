@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+
+{% block title %} Користувачі {% endblock %}
+
+{% block form_buttons %} 
+<div style="margin: 0;position: absolute;top: 50%;left: 50%;-ms-transform: translate(-50%, -50%);transform: translate(-50%, -50%);">
+    <form class="form-inline mt-2 mt-md-0"action="{% url 'search_users' %}" method="get">
+      <input name="s" type="text" class="form-control mr-sm-2" style="width: 400px">
+      <button class="btn btn-success" style="margin-left: 20px" type="submit">Пошук</button>
+    </form>
+</div>    
+<a href="{% url 'users_insert' %}" style="margin-left: 20px" class="btn btn-success"></i>Додати користувача</a>
+{% endblock %}
+
+
+{% block content %}
+
+            <table class="table table-hover table-bordered table-dark table-striped" style="margin-top: 50px">
+                <tr>
+                    <th>id</th>
+                    <th>First name</th>
+                    <th>Last name</th>
+                    <th>Middle name</th>
+                    <th>Email</th>
+                    <th>Role</th>
+                </tr >
+            {% for user in users_list %}
+                <tr> 
+                    <td>{{ user.id }}</td>
+                    <td>{{ user.first_name }}</td>
+                    <td>{{ user.last_name }}</td>
+                    <td>{{ user.middle_name }}</td>
+                    <td>{{ user.email }}</td>
+                    <td>{{ user.get_role_name }}</td>
+                    <td>
+                        <a href="{% url 'users_update' user.id %}" style="color: rgb(76, 194, 60);">Edit</a>
+
+                        <a href="{% url 'users_delete' user.id %}" style="color: rgb(194, 60, 60);">Delete</a>
+                    </td>
+
+                </tr>
+                {% endfor %}
+            </table>
+
+{% endblock %}
+
+
+

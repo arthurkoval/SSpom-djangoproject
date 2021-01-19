@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+
+{% block title %}Пошук{% endblock %}
+
+{% block form_buttons %}   
+<div style="margin: 0;position: absolute;top: 50%;left: 50%;-ms-transform: translate(-50%, -50%);transform: translate(-50%, -50%);">
+    <form class="form-inline mt-2 mt-md-0"action="{% url 'search_orders' %}" method="get">
+      <input name="s" type="text" class="form-control mr-sm-2" style="width: 400px">
+      <button class="btn btn-success" style="margin-left: 20px" type="submit">Пошук</button>
+    </form>
+</div>
+<a href="{% url 'orders_insert' %}" style="margin-left: 20px" class="btn btn-success"></i>Додати замовлення</a>
+{% endblock %}
+
+
+{% block content %}
+
+            <table class="table table-hover table-bordered table-dark table-striped" style="margin-top: 50px">
+                <tr>
+                    <th>id</th>
+                    <th>User</th>
+                    <th>Book</th>
+                    <th>Created at</th>
+                    <th>End at</th>
+                    <th>Plated end at</th>
+                </tr >
+            {% for order in object_list %}
+                <tr> 
+                    <td>{{ order.id }}</td>
+                    <td><a href="{% url 'users_update' order.user.id %}"> {{order.user.email }}</a></td>
+                    <td><a href="{% url 'books_update' order.book.id %}"> {{order.book.name }}</a></td>
+                    <td>{{ order.created_at }}</td>
+                    <td>{{ order.end_at }}</td>
+                    <td>{{ order.plated_end_at }}</td>
+                    <td>
+                        <a href="{% url 'orders_update' order.id %}" style="color: rgb(76, 194, 60);">Edit</a>
+                        <a href="{% url 'orders_delete' order.id %}" style="color: rgb(194, 60, 60);">Delete</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </table>
+       
+{% endblock %}
+
+
+

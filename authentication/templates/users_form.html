@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+
+{% block title %} Додати користувача {% endblock %}
+
+{% block form_buttons %} 
+<div style="margin: 0;position: absolute;top: 50%;left: 50%;-ms-transform: translate(-50%, -50%);transform: translate(-50%, -50%);">
+    <form class="form-inline mt-2 mt-md-0"action="{% url 'search_users' %}" method="get">
+      <input name="s" type="text" class="form-control mr-sm-2" style="width: 400px">
+      <button class="btn btn-success" style="margin-left: 20px" type="submit">Пошук</button>
+    </form>
+</div>    
+<a href="{% url 'users_insert' %}" style="margin-left: 20px" class="btn btn-success"></i>Додати користувача</a>
+{% endblock %}
+
+{% block content %}
+<div>
+    <form action="" method="POST" autocomplete="off" style="margin: 70px;">
+
+        {% csrf_token %}
+        <div>
+            <p style="color: aliceblue;"><strong>First name</strong></p>
+            {{ form.first_name }}
+            <p style="color: aliceblue;"><strong>Last name</strong></p>
+            {{ form.last_name }}
+        </div> 
+        <div>
+            <p style="color: aliceblue;"><strong>Middle name</strong></p>
+            {{ form.middle_name }}
+        </div>
+        <div>
+            <p style="color: aliceblue;"><strong>Email@</strong></p>
+            {{ form.email }}
+        </div>
+        <div>
+            <p style="color: aliceblue;"><strong>password</strong></p>
+            {{ form.password }}
+        </div>
+        <div>
+            <p style="color: aliceblue;"><strong>role</strong></p>
+            {{ form.role }}
+        </div>
+        <button type="submit" class="btn btn-success">Submit</button>
+
+    </form>
+</div>
+{% endblock content %}

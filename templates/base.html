@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>{% block title %}{% endblock %}</title>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body class="bg-dark">
+
+      <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark" style="border: 1px solid grey">
+        <a class="navbar-brand" href="#">Головна</a>
+        <div class="collapse navbar-collapse">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="{% url 'users_list' %}">Користувачі<span class="sr-only"></span></a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="{% url 'books_list' %}">Книги<span class="sr-only"></span></a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="{% url 'authors_list' %}">Автори<span class="sr-only"></span></a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="{% url 'orders_list' %}">Замовлення<span class="sr-only"></span></a>
+            </li>
+          </ul>
+
+                {% block form_buttons %}
+                {% endblock %}
+                
+        </div>
+      </nav>
+
+  {% block content %} 
+  {% endblock %}
+</body>
+</html>
+
+

@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+
+{% block title %} Книги {% endblock %}
+
+{% block form_buttons %} 
+<div style="margin: 0;position: absolute;top: 50%;left: 50%;-ms-transform: translate(-50%, -50%);transform: translate(-50%, -50%);">
+    <form class="form-inline mt-2 mt-md-0"action="{% url 'search_books' %}" method="get">
+      <input name="s" type="text" class="form-control mr-sm-2" style="width: 400px">
+      <button class="btn btn-success" style="margin-left: 20px" type="submit">Пошук</button>
+    </form>
+</div>    
+<a href="{% url 'books_insert' %}" style="margin-left: 20px" class="btn btn-success"></i>Додати книгу</a>
+{% endblock %}
+
+
+{% block content %}
+
+            <table class="table table-hover table-bordered table-dark table-striped" style="margin-top: 50px">
+                <tr>
+                    <th>id</th>
+                    <th>Book name</th>
+                    <th>Count</th>
+                    <th>Authors</th>
+                </tr >
+            {% for book in books_list %}
+                <tr> 
+                    <td>{{ book.id }}</td>
+                    <td>{{ book.name }}</td>
+                    <td>{{ book.count }}</td>
+                    <td>
+                        {% for author in book.authors.all %}
+                        <p>{{ author.name}} {{ author.surname}}</p>
+                        {% endfor %}
+                    </td>
+                    <td>
+                        <a href="{% url 'books_update' book.id %}" style="color: rgb(76, 194, 60);">Edit</a>
+
+                        <a href="{% url 'books_delete' book.id %}" style="color: rgb(194, 60, 60);">Delete</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </table>
+
+{% endblock %}
+
+
+
