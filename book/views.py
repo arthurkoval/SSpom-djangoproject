@@ -4,6 +4,15 @@ from .forms import BookForm
 from django.db.models import Q
 from django.views.generic import ListView
 
+
+from rest_framework import viewsets
+from .serializers import BookSerializer
+
+class BookView(viewsets.ModelViewSet):
+    queryset = Book.objects.all()
+    serializer_class = BookSerializer
+
+
 def books_list(request):
     context = {'books_list':Book.get_all()}
     return render(request,'books_list.html',context=context)
@@ -43,7 +52,7 @@ def books_delete(request,id=0):
     return books_redirect(request)
               
 def books_redirect(request):
-    return redirect('/books/list')
+    return redirect('/api/v1/book/list')
 
 
 

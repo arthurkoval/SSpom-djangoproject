@@ -4,6 +4,19 @@ from .forms import OrderForm
 from django.db.models import Q
 from django.views.generic import ListView
 
+
+from rest_framework import viewsets
+from .serializers import OrderSerializer
+
+class OrderView(viewsets.ModelViewSet):
+    queryset = Order.objects.all()
+    serializer_class = OrderSerializer
+
+def user_orders(request,id=0):
+    context = {'orders_list':Order.objects.filter(user = id)}
+    return render(request,'orders_list.html',context=context)
+
+
 def orders_list(request):
     context = {'orders_list':Order.get_all()}
     return render(request,'orders_list.html',context=context)
@@ -43,5 +56,5 @@ def orders_delete(request,id=0):
 
 
 def orders_redirect(request):
-    return redirect('/orders/list')
+    return redirect('/api/v1/order/list')
 

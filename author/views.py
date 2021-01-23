@@ -4,6 +4,15 @@ from .forms import AuthorForm
 from django.db.models import Q
 from django.views.generic import ListView
 
+
+from rest_framework import viewsets
+from .serializers import AuthorSerializer
+
+class AuthorView(viewsets.ModelViewSet):
+    queryset = Author.objects.all()
+    serializer_class = AuthorSerializer
+
+
 def authors_list(request):
     context = {'authors_list':Author.get_all()}
     return render(request,'authors_list.html',context=context)
@@ -43,4 +52,4 @@ def authors_delete(request,id=0):
 
 
 def authors_redirect(request):
-    return redirect('/authors/list')
+    return redirect('/api/v1/author/list')
